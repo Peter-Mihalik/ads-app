@@ -1,0 +1,30 @@
+// Defenition of models tight to sqlite db 
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/data/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id          Int      @id @default(autoincrement())
+  ico         String   @unique
+  name        String
+  adress      String
+  established DateTime
+  ads         Ad[] // 1:N Relation to Ads
+}
+
+model Ad {
+  id            Int      @id @default(autoincrement())
+  adText        String?
+  publishedDate DateTime @default(now())
+  imgPath       String?
+  topped        Boolean  @default(false)
+  companyId     Int
+  company       Company  @relation(fields: [companyId], references: [id])
+}

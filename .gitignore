@@ -1,1 +1,4 @@
-./server/node_modules/
+server/node_modules/
+server/src/data/prisma
+server/prisma/dev.db
+server/prisma/migrations/
